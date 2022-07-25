@@ -1,0 +1,35 @@
+# Shop: проверка цены в корзине
+import time
+from selenium import webdriver
+driver = webdriver.Chrome(executable_path='C:/chromedriver.exe')
+driver.maximize_window()
+driver.get("http://practice.automationtesting.in/")
+Account = driver.find_element_by_id("menu-item-50")
+Account.click()
+Username = driver.find_element_by_id("username")
+Username.send_keys("nina@mail.com")
+Password = driver.find_element_by_id("password")
+Password.send_keys("Tegy128943**")
+Login = driver.find_element_by_name("login")
+Login.click()
+Shop = driver.find_element_by_id("menu-item-40")
+Shop.click()
+HTML5_Web = driver.find_element_by_css_selector("div ul li:nth-child(4) a:nth-child(2)")
+HTML5_Web.click()
+Shop = driver.find_element_by_id('menu-item-40').click()
+Item = driver.find_element_by_css_selector(".wpmenucart-contents .cartcontents")
+Item_get_text = Item.text
+assert Item_get_text == "1 Item"
+amount = driver.find_element_by_css_selector(".wpmenucart-contents .amount")
+amount_get_text = amount.text
+assert amount_get_text == "?180.00"
+basket = driver.find_element_by_id("wpmenucartli")
+basket.click()
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+Subtotal = WebDriverWait(driver, 5).until(
+    EC.visibility_of_element_located((By.CSS_SELECTOR, ".cart-subtotal .woocommerce-Price-amount.amount")) )
+Total = WebDriverWait(driver, 5).until(
+    EC.visibility_of_element_located((By.CSS_SELECTOR, ".order-total .woocommerce-Price-amount.amount")) )

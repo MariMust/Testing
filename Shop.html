@@ -1,0 +1,21 @@
+# Shop: отображение страницы товара
+import time
+from selenium import webdriver
+driver = webdriver.Chrome(executable_path='C:/chromedriver.exe')
+driver.maximize_window()
+driver.get("http://practice.automationtesting.in/")
+Account = driver.find_element_by_id("menu-item-50")
+Account.click()
+Username = driver.find_element_by_id("username")
+Username.send_keys("nina@mail.com")
+Password = driver.find_element_by_id("password")
+Password.send_keys("Tegy128943**")
+Login = driver.find_element_by_name("login")
+Login.click()
+Shop = driver.find_element_by_id("menu-item-40")
+Shop.click()
+HTML5 = driver.find_element_by_css_selector("div ul li:nth-child(3) img")
+HTML5.click()
+Name = driver.find_element_by_css_selector(".product_title.entry-title")
+Name_get_text = Name.text
+assert Name_get_text == "HTML5 Forms"

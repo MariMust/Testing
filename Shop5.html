@@ -1,0 +1,29 @@
+# Shop: работа в корзине
+import time
+from selenium import webdriver
+driver = webdriver.Chrome(executable_path='C:/chromedriver.exe')
+driver.maximize_window()
+driver.get("http://practice.automationtesting.in/")
+Shop = driver.find_element_by_id("menu-item-40").click()
+driver.execute_script("window.scrollBy(0, 300);")
+HTML5_Web = driver.find_element_by_css_selector("div ul li:nth-child(4) a:nth-child(2)").click()
+time.sleep(3)
+JS = driver.find_element_by_css_selector("div ul li:nth-child(5) a:nth-child(2)").click()
+basket = driver.find_element_by_id("wpmenucartli").click()
+time.sleep(3)
+Close = driver.find_element_by_css_selector("tbody tr:nth-child(1) td:nth-child(1) a").click()
+time.sleep(3)
+Undo = driver.find_element_by_xpath('//*[@id="page-34"]/div/div[1]/div[1]/a').click()
+Quantity = driver.find_element_by_css_selector("tbody tr:nth-child(1) td:nth-child(5) input").clear()
+Quantity = driver.find_element_by_css_selector("tbody tr:nth-child(1) td:nth-child(5) input").send_keys(3)
+UPDATE_BASKET = driver.find_element_by_css_selector("td>input:nth-child(2)").click()
+Quantity = driver.find_element_by_css_selector("tbody tr:nth-child(1) td:nth-child(5) input")
+Quantity_value = Quantity.get_attribute("value")
+assert Quantity_value == "3"
+time.sleep(3)
+APPLY_COUPON = driver.find_element_by_css_selector("td div input:nth-child(3)").click()
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+Code = WebDriverWait(driver, 5).until(
+    EC.text_to_be_present_in_element((By.CSS_SELECTOR, "#page-34 > div > div.woocommerce > ul > li"), "Please enter a coupon code."))

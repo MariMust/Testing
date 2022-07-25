@@ -1,0 +1,17 @@
+# Registration_login: регистрация аккаунта
+import time
+from selenium import webdriver
+import pyautogui as pag
+driver = webdriver.Chrome(executable_path='C:/chromedriver.exe')
+driver.maximize_window()
+driver.get("http://practice.automationtesting.in/")
+Account = driver.find_element_by_id("menu-item-50")
+Account.click()
+Email = driver.find_element_by_id("reg_email")
+Email.send_keys("nina@mail.com")
+Password = driver.find_element_by_id("reg_password")
+Password.send_keys("Tegy128943**")
+time.sleep(3)
+pag.press("enter")
+Register = driver.find_element_by_name("register")
+Register.click()
